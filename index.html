@@ -1,22 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>WeatherDashboard</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="style.css" />
-</head>
+  </head>
 
-<body>
+  <body>
+    <header class="navbar py-3 mb-3 title-banner">
+      <h1 class="offset-4">Weather Dashboard</h1>
+    </header>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-3" style="background-color: grey;">
+          <div class="input-group">
+            <form id="weather-form">
+              <h1 for="city-input"><str>Search for a City:</str></h1>
+              <input type="text" id="city-input" />
+              <button id="add-city" type="submit" value="reset">
+                <span class="fa fa-search"></span>
+              </button>
+            </form>
+          </div>
+          <h3 id="search-history">Search History:</h3>
+          <div class="list-group">
+            <button
+              type="button"
+              class="list-group-item list-group-item-action active"
+            >
+              Cras justo odio
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+            >
+              Dapibus ac facilisis in
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+            >
+              Morbi leo risus
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+            >
+              Porta ac consectetur ac
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              disabled
+            >
+              Vestibulum at eros
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              disabled
+            >
+              Vestibulum at eros
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              disabled
+            >
+              Vestibulum at eros
+            </button>
+            <button
+              type="button"
+              class="list-group-item list-group-item-action"
+              disabled
+            >
+              Vestibulum at eros
+            </button>
+          </div>
+        </div>
+        <div class="col-9">
+          <div class="card" style="margin-bottom: 25px;">
+            <div class="card-body">
+              <h3 class="card-title">City<span>Date</span><span>icon</span></h3>
+
+              <p class="card-text">Temperature:</p>
+
+              <p class="card-text">Humidity:</p>
+
+              <p class="card-text">Wind Speed:</p>
+
+              <p class="card-text">UV Index:</p>
+            </div>
+          </div>
+          <div class="row">
+            <div
+              class="card text-white bg-secondary"
+              style="max-width: 15rem; margin-left: 15px;"
+            >
+              <div class="card-header">Date here</div>
+              <div class="card-body">
+                <p>Icon goes here</p>
+                <p>Temperature:</p>
+                <p>Humidity</p>
+              </div>
+            </div>
+            <div
+              class="card text-white bg-secondary"
+              style="max-width: 15rem; margin-left: 15px;"
+            >
+              <div class="card-header">Date here</div>
+              <div class="card-body">
+                <p>Icon goes here</p>
+                <p>Temperature:</p>
+                <p>Humidity</p>
+              </div>
+            </div>
+            <div
+              class="card text-white bg-secondary"
+              style="max-width: 15rem; margin-left: 15px;"
+            >
+              <div class="card-header">Date here</div>
+              <div class="card-body">
+                <p>Icon goes here</p>
+                <p>Temperature:</p>
+                <p>Humidity</p>
+              </div>
+            </div>
+            <div
+              class="card text-white bg-secondary"
+              style="max-width: 15rem; margin-left: 15px;"
+            >
+              <div class="card-header">Date here</div>
+              <div class="card-body">
+                <p>Icon goes here</p>
+                <p>Temperature:</p>
+                <p>Humidity</p>
+              </div>
+            </div>
+            <div
+              class="card text-white bg-secondary"
+              style="max-width: 15rem; margin-left: 15px;"
+            >
+              <div class="card-header">Date here</div>
+              <div class="card-body">
+                <p>Icon goes here</p>
+                <p>Temperature:</p>
+                <p>Humidity</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script defer src="script.js"></script>
     <script defer src="moment.min.js"></script>
-</body>
-
+  </body>
 </html>
