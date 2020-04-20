@@ -24,8 +24,8 @@ function displayCityWeather(city) {
         var currentTemp = Math.round(response.main.temp);
         var currentHumid = Math.round(response.main.humidity);
 
-        $("#current-city").html(("City: " + response.name + " (" + today + ")" + "<img src=" + iconUrl + ">"));
-        $("#current-temp").text(`Temperature: ${currentTemp}°F`);
+        $("#current-city").html((response.name + " (" + today + ")" + "<img src=" + iconUrl + ">"));
+        $("#current-temp").text(`Temperature: ${currentTemp}° F`);
         $("#current-hum").text("Humidity: " + currentHumid + " %");
         $("#current-wind").text("Wind Speed: " + response.wind.speed + " MPH");
         var lat = response.coord.lat;
@@ -36,7 +36,34 @@ function displayCityWeather(city) {
             method: "GET"
         }).then(function (response) {
             console.log(response);
-            $("#current-uv").text("UV Index: " + response.value);
+            var uvIndex = response.value;
+            var uvColorCode = "";
+            if (uvIndex <= 1) {
+                uvColorCode = "#228B22";
+            } else if (uvIndex <= 2) {
+                uvColorCode = "#006400";
+            } else if (uvIndex <= 3) {
+                uvColorCode = "#FFFF66";
+            } else if (uvIndex <= 4) {
+                uvColorCode = "#FFFF33";
+            } else if (uvIndex <= 5) {
+                uvColorCode = "#FFFF00";
+            } else if (uvIndex <= 6) {
+                uvColorCode = "#ffa500";
+            } else if (uvIndex <= 7) {
+                uvColorCode = "##FF8c00";
+            } else if (uvIndex <= 8) {
+                uvColorCode = "#FF4500";
+            } else if (uvIndex <= 9) {
+                uvColorCode = "#ff0000";
+            } else if (uvIndex <= 10) {
+                uvColorCode = "#8b0000";
+            } else if (uvIndex <= 11) {
+                uvColorCode = "#9370DB";
+            } else if (uvIndex => 11) {
+                uvColorCode = "#800080";
+            };
+            $("#current-uv").text(uvIndex).attr("style", "background-color: " + uvColorCode);
         });
     });
 };
@@ -66,12 +93,14 @@ function renderFiveDayForecast(city) {
             var cityHumidityForecast = response.list[i].main.humidity;
 
             $("#five-day-forecast")
-                .append($("<div>").addClass("card text-white bg-secondary float-left")
+                .append($("<div>").addClass("card text-white bg-primary float-left")
                     .attr("id", "forecast-card")
-                    .attr("style", "max-width: 15 rem; margin-left: 15px")
+                    .attr("style", "max-width: 10rem; margin-left: 23px")
                     .append($("<p>").html(nextDay))
-                    .append($("<img src=" + iconForecastURL + ">"))
-                    .append($("<p>").html("Temperature: " + cityTemperatureForecast + " °F"))
+                    .append($("<img src=" + iconForecastURL + ">")
+                        .attr("height", "50px")
+                        .attr("width", "50px"))
+                    .append($("<p>").html("Temperature: " + cityTemperatureForecast + "° F"))
                     .append($("<p>").html("Humidity: " + cityHumidityForecast + " %"))
 
                 );
@@ -86,17 +115,23 @@ function renderButtons() {
     const cities = JSON.parse(localStorage.getItem("cities"))
     if (!localStorage.getItem("cities")) {
         localStorage.setItem("cities", JSON.stringify([]))
-    }
+    };
     $("#buttons-view").empty();
-    for (var i = 0; i <= 10; i++) {
+    var searchListLength = cities.length;
+    if (searchListLength >= 8) {
+        searchListLength -= 8;
+    } else {
+        searchListLength = 0;
+    }
+    for (var i = searchListLength; i <= cities.length; i++) {
         var a = $("<button>");
         a.attr("type", "button");
-        a.addClass("list-group-item list-group-item-action");
+        a.addClass("list-group-item");
         a.addClass("city");
         a.attr("data-name", cities[i]);
         a.text(cities[i]);
         $("#buttons-view").prepend(a);
-    }
+    };
 };
 
 $("#add-city").on("click ", function (event) {
@@ -108,6 +143,7 @@ $("#add-city").on("click ", function (event) {
     displayCityWeather(city);
     renderFiveDayForecast(city);
     renderButtons();
+    $("#city-input").val("");
     console.log("#add-city was clicked");
 });
 
@@ -115,13 +151,13 @@ $(document).on("click", ".city", function () {
     var city = $(this).attr("data-name");
     displayCityWeather(city);
     renderFiveDayForecast(city);
-})
+});
 
 function start() {
     renderButtons();
     const stored_cities = JSON.parse(localStorage.getItem("cities"));
     displayCityWeather(stored_cities[stored_cities.length - 1]);
     renderFiveDayForecast(stored_cities[stored_cities.length - 1]);
-}
+};
 
-start()
+start();
