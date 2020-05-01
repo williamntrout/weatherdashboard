@@ -69,7 +69,7 @@ function displayCityWeather(city) {
       } else if (uvIndex <= 6) {
         uvColorCode = "#ffa500";
       } else if (uvIndex <= 7) {
-        uvColorCode = "##FF8c00";
+        uvColorCode = "#FF8c00";
       } else if (uvIndex <= 8) {
         uvColorCode = "#FF4500";
       } else if (uvIndex <= 9) {
